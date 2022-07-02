@@ -23,20 +23,15 @@
         </button>
         <a class="navbar-brand">CodeIt</a>
       </div>
-
-      <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <!-- <li><a href="{% url 'judge:login' %}">Login</a></li> -->
-        </ul>
-      </div>
     </div>
   </nav>
 
   <div class="container">
     <div class="row">
       {% block content %}
+      {% load crispy_forms_tags %}
       <div class="container">
-        <form action="{% url 'judge:login' %}" method="post">
+        <form method="post">
           {% csrf_token %}
           <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -45,6 +40,7 @@
                 {% if error_message %}
                 <p class="bg-danger p-d ml-b">{{ error_message }}</p>
                 {% endif %}
+                {{ login_form|crispy }}
                 <div class="form-group clearfix">
                   <label for="username" class="col-md-4 control-label text-right">Username:</label>
                   <div class="col-md-6">
