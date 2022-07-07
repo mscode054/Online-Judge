@@ -25,21 +25,16 @@
             </div>
         </div>
     </nav>
+    {% if solutions %}
+    <ul>
+        {% for s in solutions %}
+        <p>{{ s.problem.name }} - {{ s.verdict }} - {{ s.time_of_submission }}</p>
+        {% endfor %}
 
-    <div class="container">
-        <div class="row">
-            {% block content %}
-            {% for ps in p %}
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <a href="{% url 'judge:desc' ps.id %}">{{ ps.title }}</a>
-                </li>
-            </ul>
-            {% endfor %}
-            {% endblock %}
-        </div>
-    </div>
-
+    </ul>
+    {% else %}
+    <h3> No data available. </h3>
+    {% endif %}
 </body>
 
 </html>

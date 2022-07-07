@@ -7,6 +7,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='judge/login.html'), name='login_req'),
     path('register/', views.register, name='register'),
     path('problems/', views.problems, name='problems'),
-    path('<int:pk>/', views.DetailView.as_view(), name='desc'),
-    path('<int:problem_id>/verdict/', views.verdict, name='verdict'),
+    path('problems/<int:pk>/', views.DetailView.as_view(), name='desc'),
+    path('problems/<int:problem_id>/verdict/', views.submission, name='submission'),
+    path('leaderboard/', views.leaderboard, name='leaderboard'),
 ]
