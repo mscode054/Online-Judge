@@ -60,14 +60,14 @@ class DetailView(generic.DetailView):
     template_name = 'judge/problem_desc.html'
 
 def submission(request,problem_id):
-	f=request.FILES['solution'] 
-	with open('F:/OJ/judge/uploads/sol/solution.cpp','wb+') as dest:
+	f=request.FILES["solution"] 
+	with open("F:/OJ/judge/uploads/sol/solution%d.cpp" % problem_id,'wb+') as dest:
 		for chunk in f.chunks():
 			dest.write(chunk)
-	os.system('g++ F:/OJ/judge/uploads/sol/solution.cpp')
-	os.system('./a.out < F:/OJ/judge/uploads/input/problem_2/single_number_input.txt > F:/OJ/judge/uploads/output/problem_2/out.txt')
+	os.system('g++ F:/OJ/judge/uploads/sol/solution%d.cpp' % problem_id)
+	os.system('a.exe < F:/OJ/judge/uploads/input/problem_2/single_number_input.txt > F:/OJ/judge/uploads/output/problem_2/out%d.txt' % problem_id)
 
-	out1='F:/OJ/judge/uploads/output/problem_2/out.txt'
+	out1='F:/OJ/judge/uploads/output/problem_2/out%d.txt' % problem_id
 	out2='F:/OJ/judge/uploads/output/problem_2/single_number_output.txt'
 	if(filecmp.cmp(out1,out2,shallow=False)):
 		verdict='Accepted'
@@ -80,7 +80,7 @@ def submission(request,problem_id):
 	solution.time_of_submission=timezone.now()
 	solution.submitted_code='F:/OJ/judge/uploads/sol/solution.cpp'
 	solution.save()
-	return HttpResponseRedirect(reverse('judge:leaderboard'))
+	return HttpResponseRedirect(reverse('judge:leaderboard'))	
 
 def leaderboard(request):
 	solutions=Solution.objects.all()
