@@ -22,6 +22,18 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="{% url 'judge:problems' %}">CodeIt</a>
+                {% if user.is_authenticated %}
+                <span class="navbar-text">
+                    Welcome, {{user.username}}</span>
+                <span class="navbar-text">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </span>
+
+                {% else %}
+                <span class="navbar-text">
+                    <a class="nav-link" href="/">Login</a>
+                </span>
+                {% endif %}
             </div>
         </div>
     </nav>
@@ -29,7 +41,8 @@
     {% if solutions %}
     <ul>
         {% for s in solutions %}
-        <p>{{ s.problem.name }} - {{ s.verdict }} - {{ s.time_of_submission }}</p>
+        <p>{{ s.problem.title }} - {{ s.verdict }} - {{ s.time_of_submission }} - <a href={{s.submitted_code}}
+                download>Code</a></p>
         {% endfor %}
 
     </ul>

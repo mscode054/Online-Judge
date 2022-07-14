@@ -4,7 +4,8 @@ from . import views
 
 app_name='judge'
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='judge/login.html'), name='login_req'),
+    path('', views.login_req, name='login'),
+    path('logout/', views.logout_request, name='logout'),
     path('register/', views.register, name='register'),
     path('problems/', views.problems, name='problems'),
     path('problems/<int:pk>/', views.DetailView.as_view(), name='desc'),

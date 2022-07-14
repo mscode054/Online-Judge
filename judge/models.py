@@ -14,7 +14,7 @@ class Solution(models.Model):
     problem=models.ForeignKey(Problem,on_delete=models.CASCADE)
     verdict=models.CharField(max_length=100)
     def get_upload_path_inp(instance, filename):
-        return os.path.join("uploads/sol/problem_%d" % instance.problem.id,filename)
+        return os.path.join("" ,filename)
     submitted_code=models.FileField(upload_to=get_upload_path_inp)
     time_of_submission=models.DateTimeField('submitted at')
     
